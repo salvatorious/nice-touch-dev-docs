@@ -31,7 +31,6 @@ this is config file text
 
   * `sudo nano /etc/hosts` -> add the following line: 
 
-  * 
 ```
 127.0.0.1           sites.dev www.sites.dev
 ```

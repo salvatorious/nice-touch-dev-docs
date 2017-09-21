@@ -44,3 +44,8 @@ this is config file text
 * install [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 * change directories to your projects folder: `cd ~/Projects`
 * clone repository to projects folder: `git clone https://github.com/salvatorious/aldrich-advisors.git`
+* `cd aldrich-advisors`
+* `composer install`
+* `yarn`
+* `yarn run start`
+

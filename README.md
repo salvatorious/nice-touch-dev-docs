@@ -4,8 +4,6 @@ Good luck! Hit me up if you need anything that I forgot.
 *-Sal*
 
 **Notes:**
-
----
 `this is a terminal command`  
 
 ```

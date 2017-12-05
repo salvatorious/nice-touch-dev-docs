@@ -59,3 +59,32 @@ Edit `app/setup.php` to enable or disable theme features, setup navigation menus
 * `yarn run start` — Compile assets when file changes are made, start Browsersync session
 * `yarn run build` — Compile and optimize the files in your assets directory
 * `yarn run build:production` — Compile assets for production
+
+
+### Fix for broken apache after MacOS update
+
+- sudo nano /etc/apache2/extra/httpd-vhosts.conf
+```
+<VirtualHost *:80>
+    ServerAdmin salvatore@nicetouch.co
+    DocumentRoot "/Users/salvatore/Sites"
+    ServerName sites.dev
+    ServerAlias sites.dev www.sites.dev
+    ErrorLog "/private/var/log/apache2/sites.dev-error_log"
+    CustomLog "/private/var/log/apache2/sites.dev-access_log" common
+</VirtualHost>
+```
+
+- `sudo nano /etc/apache2/httpd.conf`  
+- Uncomment all these lines (remove # sign from front of line)  
+
+`#LoadModule authz_core_module libexec/apache2/mod_authz_core.so`
+`#LoadModule authz_host_module libexec/apache2/mod_authz_host.so`
+`#LoadModule userdir_module libexec/apache2/mod_userdir.so`
+`#LoadModule include_module libexec/apache2/mod_include.so`
+`#LoadModule rewrite_module libexec/apache2/mod_rewrite.so`
+`#LoadModule vhost_alias_module libexec/apache2/mod_vhost_alias.so`
+
+`#Include /private/etc/apache2/extra/httpd-vhosts.conf`
+
+- Save file, then run `sudo apachectl restart`

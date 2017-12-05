@@ -63,7 +63,7 @@ Edit `app/setup.php` to enable or disable theme features, setup navigation menus
 
 ### Fix for broken apache after MacOS update
 
-- sudo nano /etc/apache2/extra/httpd-vhosts.conf
+- `sudo nano /etc/apache2/extra/httpd-vhosts.conf`
 ```
 <VirtualHost *:80>
     ServerAdmin salvatore@nicetouch.co

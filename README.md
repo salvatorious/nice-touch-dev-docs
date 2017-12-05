@@ -78,12 +78,12 @@ Edit `app/setup.php` to enable or disable theme features, setup navigation menus
 - `sudo nano /etc/apache2/httpd.conf`  
 - Uncomment all these lines (remove # sign from front of line)  
 
-`#LoadModule authz_core_module libexec/apache2/mod_authz_core.so`
-`#LoadModule authz_host_module libexec/apache2/mod_authz_host.so`
-`#LoadModule userdir_module libexec/apache2/mod_userdir.so`
-`#LoadModule include_module libexec/apache2/mod_include.so`
-`#LoadModule rewrite_module libexec/apache2/mod_rewrite.so`
-`#LoadModule vhost_alias_module libexec/apache2/mod_vhost_alias.so`
+`#LoadModule authz_core_module libexec/apache2/mod_authz_core.so`  
+`#LoadModule authz_host_module libexec/apache2/mod_authz_host.so`  
+`#LoadModule userdir_module libexec/apache2/mod_userdir.so`  
+`#LoadModule include_module libexec/apache2/mod_include.so`  
+`#LoadModule rewrite_module libexec/apache2/mod_rewrite.so`  
+`#LoadModule vhost_alias_module libexec/apache2/mod_vhost_alias.so`  
 
 `#Include /private/etc/apache2/extra/httpd-vhosts.conf`
 

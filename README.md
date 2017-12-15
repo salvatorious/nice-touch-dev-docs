@@ -90,6 +90,7 @@ Edit `app/setup.php` to enable or disable theme features, setup navigation menus
 - Save file, then run `sudo apachectl restart`
 
 ### Switching from .dev to .test locally
+- In {theme}/resources/assets/config.js, edit the `devUrl`  
 - edit `/etc/apache2/extra/httpd-vhosts.conf`  
 - edit `sudo nano /etc/hosts`  
 - `sudo apachectl restart`  

@@ -58,7 +58,7 @@ Edit `app/setup.php` to enable or disable theme features, setup navigation menus
 
 * `yarn run start` — Compile assets when file changes are made, start Browsersync session
 * `yarn run build` — Compile and optimize the files in your assets directory
-* `yarn run build:production` — Compile assets for production
+* `yarn run build:production` — Compile assets for production  
 
 
 ### Fix for broken apache after MacOS update
@@ -88,3 +88,15 @@ Edit `app/setup.php` to enable or disable theme features, setup navigation menus
 `#Include /private/etc/apache2/extra/httpd-vhosts.conf`
 
 - Save file, then run `sudo apachectl restart`
+
+### Switching from .dev to .test locally
+- edit `/etc/apache2/extra/httpd-vhosts.conf`  
+- edit `sudo nano /etc/hosts`  
+- `sudo apachectl restart`  
+- execute this SQL in the appropriate database:  
+```sql
+UPDATE wp_options SET option_value = replace(option_value, 'http://sites.dev/aldrich', 'http://sites.test/aldrich') WHERE option_name = 'home' OR option_name = 'siteurl';
+UPDATE wp_posts SET guid = replace(guid, 'http://sites.dev/aldrich','http://sites.test/aldrich');
+UPDATE wp_posts SET post_content = replace(post_content, 'http://sites.dev/aldrich', 'http://sites.test/aldrich');
+UPDATE wp_postmeta SET meta_value = replace(meta_value,'http://sites.dev/aldrich','http://sites.test/aldrich');
+```

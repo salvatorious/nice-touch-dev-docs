@@ -52,7 +52,8 @@ this is config file text
 * You MAY need to fix local file permissions at this point. I use `sudo chown -R _www ~/Sites/aldrich ; sudo chmod -R g+w ~/Sites/aldrich`, but Alec's command to do this might be different because of his borky permission situation.  
 * Unzip db dump `gunzip ~/Downloads/dump-file-name.tar.gz`  
 * Import db to local database you've hopefully created `mysql -u root -p databasenamegoeshere < ~/Downloads/dump-file-name.sql`  
-* Migrate local database urls ```sql
+* Migrate local database urls  
+```sql
 UPDATE wp_options SET option_value = replace(option_value, 'http://dev-aldrich-advisors.pantheonsite.io', 'http://sites.test/aldrich') WHERE option_name = 'home' OR option_name = 'siteurl';
 UPDATE wp_posts SET guid = replace(guid, 'http://dev-aldrich-advisors.pantheonsite.io','http://sites.test/aldrich');
 UPDATE wp_posts SET post_content = replace(post_content, 'http://dev-aldrich-advisors.pantheonsite.io', 'http://sites.test/aldrich');

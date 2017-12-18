@@ -1,5 +1,5 @@
-# Local WordPress dev setup
-
+# Nice Touch Developer Docs
+  
 Good luck! Hit me up if you need anything that I forgot.  
 *-Sal*
 
@@ -11,29 +11,30 @@ this is config file text
 ```  
 
 ---
+## Set up local WordPress dev environment 
+
 * [Set up Apache, MySQL and PHP](https://coolestguidesontheplanet.com/get-apache-mysql-php-and-phpmyadmin-working-on-macos-sierra/)
   *  I prefer [Sequel Pro](https://www.sequelpro.com/) over installing PHPMyAdmin locally, so you can skip that step
 * install a [WordPress](https://wordpress.org/) site in your `~/Sites` directory
-  * make a virtual host for ~/Sites to sites.dev: `sudo nano /etc/apache2/extra/httpd-vhosts.conf`
+  * make a virtual host for ~/Sites to sites.test: `sudo nano /etc/apache2/extra/httpd-vhosts.conf`
  
 ```
 <VirtualHost *:80>  
     ServerAdmin schlub@howtomeetladies.com,  
     DocumentRoot "/Users/{user}/Sites"  
-    ServerName sites.dev  
-    ServerAlias sites.dev www.sites.dev  
-    ErrorLog "/private/var/log/apache2/sites.dev-error_log"  
-    CustomLog "/private/var/log/apache2/sites.dev-access_log"   common
+    ServerName sites.test  
+    ServerAlias sites.test www.sites.test  
+    ErrorLog "/private/var/log/apache2/sites.test-error_log"  
+    CustomLog "/private/var/log/apache2/sites.test-access_log"   common
 </VirtualHost>
 ```
 
   * `sudo nano /etc/hosts` -> add the following line: 
 
 ```
-127.0.0.1           sites.dev www.sites.dev
+127.0.0.1           sites.test www.sites.test
 ```
   
-
 *  at minimum, PHP version should be [PHP](http://php.net/manual/en/install.php) >= 5.6.4
   * `php --version` to check version
   * [Update PHP to 7.0 macOS Sierra](https://medium.com/zenchef-tech-and-product/how-to-upgrade-your-version-of-php-to-7-0-on-macos-sierra-e1bfdea55a63)
@@ -43,6 +44,24 @@ this is config file text
 * change directories to your projects folder: `cd ~/Projects`
 * clone theme repository to projects folder: `git clone https://github.com/salvatorious/aldrich-advisors.git`
 
+## Copy Pantheon site to local environment  
+
+* Copy remote plugins folder (`/code/wp-content/plugins`) to `~/Sites/localwhatever/wp-content/plugins`  
+* Copy the contents of remote `/files` into `~/Sites/localwhatever/wp-content/uploads`  
+* You MAY need to fix local file permissions at this point. I use `sudo chown -R _www ~/Sites/aldrich ; sudo chmod -R g+w ~/Sites/aldrich`, but Alec's command to do this might be different because of his borky permission situation.  
+* ![Export Pantheon database](http://nicetouch.co/wp-content/uploads/2017/12/Screenshot-2017-12-17-18.09.50.png)  
+* Unzip db dump `gunzip ~/Downloads/dump-file-name.tar.gz`  
+* Import db to local database you've hopefully created `mysql -u root -p databasenamegoeshere < ~/Downloads/dump-file-name.sql`  
+* Migrate local database urls ```sql
+UPDATE wp_options SET option_value = replace(option_value, 'http://dev-aldrich-advisors.pantheonsite.io', 'http://sites.test/aldrich') WHERE option_name = 'home' OR option_name = 'siteurl';
+UPDATE wp_posts SET guid = replace(guid, 'http://dev-aldrich-advisors.pantheonsite.io','http://sites.test/aldrich');
+UPDATE wp_posts SET post_content = replace(post_content, 'http://dev-aldrich-advisors.pantheonsite.io', 'http://sites.test/aldrich');
+UPDATE wp_postmeta SET meta_value = replace(meta_value,'http://dev-aldrich-advisors.pantheonsite.io','http://sites.test/aldrich');
+```
+* Symlink a theme folder to point at the theme repo folder (which is probably somewhere in ~/Projects)  
+* Try logging in at /wp-admin, if that works, then you're good! Don't forget to save your permalink settings.  
+  
+  
 ## Theme setup
 
 Edit `app/setup.php` to enable or disable theme features, setup navigation menus, post thumbnail sizes, and sidebars.
@@ -68,10 +87,10 @@ Edit `app/setup.php` to enable or disable theme features, setup navigation menus
 <VirtualHost *:80>
     ServerAdmin salvatore@nicetouch.co
     DocumentRoot "/Users/salvatore/Sites"
-    ServerName sites.dev
-    ServerAlias sites.dev www.sites.dev
-    ErrorLog "/private/var/log/apache2/sites.dev-error_log"
-    CustomLog "/private/var/log/apache2/sites.dev-access_log" common
+    ServerName sites.test
+    ServerAlias sites.test www.sites.test
+    ErrorLog "/private/var/log/apache2/sites.test-error_log"
+    CustomLog "/private/var/log/apache2/sites.test-access_log" common
 </VirtualHost>
 ```
 

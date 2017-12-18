@@ -47,9 +47,9 @@ this is config file text
 ## Copy Pantheon site to local environment  
 
 * Copy remote plugins folder (`/code/wp-content/plugins`) to `~/Sites/localwhatever/wp-content/plugins`  
-* Copy the contents of remote `/files` into `~/Sites/localwhatever/wp-content/uploads`  
+* Export the database and files via the Pantheon dashboard  ![Export Pantheon database](http://nicetouch.co/wp-content/uploads/2017/12/Screenshot-2017-12-17-18.09.50.png)  
+* Copy the files into your local install at `~/Sites/localwhatever/wp-content/uploads`  
 * You MAY need to fix local file permissions at this point. I use `sudo chown -R _www ~/Sites/aldrich ; sudo chmod -R g+w ~/Sites/aldrich`, but Alec's command to do this might be different because of his borky permission situation.  
-* ![Export Pantheon database](http://nicetouch.co/wp-content/uploads/2017/12/Screenshot-2017-12-17-18.09.50.png)  
 * Unzip db dump `gunzip ~/Downloads/dump-file-name.tar.gz`  
 * Import db to local database you've hopefully created `mysql -u root -p databasenamegoeshere < ~/Downloads/dump-file-name.sql`  
 * Migrate local database urls ```sql

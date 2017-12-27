@@ -1,5 +1,6 @@
-#(https://pantheon.io/docs/local-development/)[https://pantheon.io/docs/local-development/]  
----
+# (https://pantheon.io/docs/local-development/)[https://pantheon.io/docs/local-development/]  
+  
+  
 
 ## Install Terminus (Pantheon command-line client)
 - Install Terminus: `brew install homebrew/php/terminus`  

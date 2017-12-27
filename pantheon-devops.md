@@ -10,8 +10,9 @@
 - List sites with Terminus: `terminus site:list` 
 
 ## Clone Pantheon site to Homestead shared folder
-
-**Code & WordPress**
+  
+  
+**Code & WordPress**  
 Go to your site's Dashboard->Code tab, click on Git mode under Connection Mode, and copy the git clone command. Navigate to your Homestead shared folder (mine is ~/Code), and paste in the command (the git clone will include a folder, you don't need to create one).  
   
 **Database**

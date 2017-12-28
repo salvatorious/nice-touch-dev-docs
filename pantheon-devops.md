@@ -14,8 +14,8 @@
 - `chmod +x wp-cli.phar`  
 - `sudo mv wp-cli.phar /usr/local/bin/wp`    
 - Then, run `wp --info` to verify that it works    
+- Now, you can do a full find and replace from any of your WordPress root directories with: `wp search-replace 'http://oldurl.com' 'http://yourlocalurl.test'`   
   
-
 ## Clone Pantheon site to Homestead shared folder
   
   
@@ -42,7 +42,7 @@ Now, you can migrate your URLs in the database with WP-CLI:
 - Navigate to WordPress root directory, then run `wp search-replace 'http://oldpantheonurl.com' 'http://yourlocalurl.test'`  
 - Reverse the commented db host lines in `wp-config-local.php`  
   
-  
+
 **Files**
 - Create remote file backup:  `terminus backup:create <site>.<env> --element=files` (this can take a while)  
 - `cd ~/Code/<site>/wp-content/`  

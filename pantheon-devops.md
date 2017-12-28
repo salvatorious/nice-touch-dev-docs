@@ -9,6 +9,13 @@
 - After that initial login, you should be able to perform subsequent logins with: `terminus auth:login --email=email@example.com`
 - List sites with Terminus: `terminus site:list` 
 
+## Install WP-CLI
+- `curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar`  
+- `chmod +x wp-cli.phar`  
+- `sudo mv wp-cli.phar /usr/local/bin/wp`    
+- Then, run `wp --info` to verify that it works    
+  
+
 ## Clone Pantheon site to Homestead shared folder
   
   
@@ -26,17 +33,15 @@ Go to your site's Dashboard->Code tab, click on Git mode under Connection Mode, 
     define( 'DB_USER', 'homestead' );
     define( 'DB_PASSWORD', 'secret' );
     define( 'DB_HOST', '127.0.0.1' );
+    // define( 'DB_HOST', '127.0.0.1:33060' ); // uncomment this when you need to use wp-cli
     define( 'WPLANG', '' );
     define( 'WP_DEBUG', true );
     define( 'SCRIPT_DEBUG', true );
     ```
-- Migrate your URLs in the database:
-```SQL
-UPDATE wp_options SET option_value = replace(option_value, 'http://dev-aldrich-advisors.pantheonsite.io', 'http://aldrich-advisors.test') WHERE option_name = 'home' OR option_name = 'siteurl';
-UPDATE wp_posts SET guid = replace(guid, 'http://dev-aldrich-advisors.pantheonsite.io','http://aldrich-advisors.test');
-UPDATE wp_posts SET post_content = replace(post_content, 'http://dev-aldrich-advisors.pantheonsite.io', 'http://aldrich-advisors.test');
-UPDATE wp_postmeta SET meta_value = replace(meta_value,'http://dev-aldrich-advisors.pantheonsite.io','http://aldrich-advisors.test');
-``` 
+Now, you can migrate your URLs in the database with WP-CLI:  
+- Navigate to WordPress root directory, then run `wp search-replace 'http://oldpantheonurl.com' 'http://yourlocalurl.test'`  
+- Reverse the commented db host lines in `wp-config-local.php`  
+  
   
 **Files**
 - Create remote file backup:  `terminus backup:create <site>.<env> --element=files` (this can take a while)  

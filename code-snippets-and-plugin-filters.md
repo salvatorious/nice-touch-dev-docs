@@ -1,9 +1,9 @@
-##Gravity Forms
+## Gravity Forms
 Gravity forms documentation is pretty good, here's a link to customizing the output structure.
 **[Gravity Forms filter documentation](https://docs.gravityforms.com/category/extending-gravity-forms/hooks/filters/)**
 
 
-##Page Jump anchors
+## Page Jump anchors
 Use headline fields to automatically make sections linkable  
 **Note:** this assumes that the `slugify` utility has been loaded in the theme  
 `<a id="{!! slugify(get_sub_field('headline')) !!}" class="anchor"></a>`
@@ -17,7 +17,7 @@ a.anchor { // offset for page jumps so content has breathing room
 ```
 
 
-##Viewport entry animation classes
+## Viewport entry animation classes
 1. Install animation library: `yarn add gsap`  
 2. Install viewport entry library: `yarn add in-view`  
 3. In main.js:   
@@ -49,5 +49,5 @@ inView('.fade-in')
 }
 ```
 5. Add classes to markup  
-6. Make more cool animation classes  
+6. Make more cool animation classes!
 

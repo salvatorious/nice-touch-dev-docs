@@ -33,4 +33,4 @@ From the theme directory,
 ## Adding Test Data (Optional)
 * `curl -OL https://raw.githubusercontent.com/poststatus/wptest/master/wptest.xml`
 * `wp plugin install wordpress-importer --activate`
-* `wp import wptest.xml --authors=Test`
+* `wp import wptest.xml --authors=create`

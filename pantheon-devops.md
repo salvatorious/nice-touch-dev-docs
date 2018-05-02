@@ -19,15 +19,54 @@
   
 
 ## Clone Pantheon site to local folder
-    
 **Code & WordPress**  
-Go to your site's Dashboard->Code tab, click on Git mode under Connection Mode, and copy the git clone command. Navigate to your Homestead shared folder (mine is ~/Code), and paste in the command (the git clone will include a folder, you don't need to create one).  
+Go to your site's Dashboard->Code tab, click on Git mode under Connection Mode, and copy the git clone command. Navigate to your local projects folder (mine is ~/Sites), and paste in the command (the git clone will include a folder, you don't need to create one).  
   
 **Database**
-- Create remote db backup:  `terminus backup:create <site>.<env> --element=db`  
-- Get remote db backup (downloads to whatever dir you're in):  `terminus backup:get <site>.<env> --element=db | xargs curl -o database.sql.gz`  
-- Import backup file to Homestead MySQL (database needs to be declared in your Homestead.yaml file):  `gunzip < database.sql.gz | mysql -uhomestead -psecret databasename --host=127.0.0.1 --port=33060`  
-- Create a `~/Code/<site>/wp-config-local.php` file and gitignore it, so you can have your local db info in here (this should be one of the databases listed in your Homestead.yaml file).
+- Copy this script to a file (`import-dev-db.sh` is fine), then run a `chmod +x` command on it.  
+- Then, call it with `./import-dev-sb.sh`    
+```
+#!/bin/bash
+
+#Authenticate Terminus
+terminus auth:login
+
+#Provide the target site name (e.g. your-awesome-site)
+echo 'Enter Pantheon site slug (e.g. your-awesome-site), then press [ENTER] to import the Dev database to your local mysql:';
+read SITE;
+
+#Create remote backup
+terminus backup:create $SITE.dev --element=db
+
+#Get remote db backup (downloads to whatever dir you're in) 
+terminus backup:get $SITE.dev --element=db | xargs curl -o database-$SITE.sql.gz
+
+echo 'MySQL user name:';
+read USER;
+
+echo 'MySQL password:';
+read -s PASSWORD;
+
+echo 'Name of your local database:';
+read DATABASE;
+
+#Unzip sql dump and import to mysql
+gunzip < database-$SITE.sql.gz | mysql -u$USER -p$PASSWORD $DATABASE
+
+#Clean up the db dump 
+rm database-$SITE.sql.gz
+
+echo 'Database imported!';
+
+cd ~/Sites/$SITE;
+
+wp search-replace http://dev-$SITE.pantheonsite.io http://sites.test/$SITE;
+
+echo 'URLs migrated! All done!';
+
+```
+
+- Create a `~/Sites/<site>/wp-config-local.php` file and gitignore it, so you can have your local db info in here (this should be one of the databases listed in your Homestead.yaml file).
     ```php
     <?php
     define( 'DB_NAME', 'databasename' );
@@ -44,9 +83,10 @@ Now, you can migrate your URLs in the database with WP-CLI:
   
 
 **Files**
+- Realistically, probably easiest to just download the file export and unzip into your wp-content/uploads folder...  
 - Create remote file backup:  `terminus backup:create <site>.<env> --element=files` (this can take a while)  
 - `cd ~/Code/<site>/wp-content/`  
 - Get remote file backup and copy into current dir:  `terminus backup:get <site>.<env> --element=files | xargs curl -o files.tar.gz`  
 - Unzip files backup:  `gunzip files.tar.gz`  
 - Rename containing folder to "uploads"  
-- Fix permissions: `sudo chown -R _www ~/Code/<site> ; sudo chmod -R g+w ~/Code/<site>`
+- Fix permissions: `sudo chown -R _www ~/Sites/<site> ; sudo chmod -R g+w ~/Sites/<site>`

@@ -3,7 +3,7 @@
 
 
 ## Install Terminus (Pantheon command-line client)
-- Install Terminus via Homebrew: `brew install homebrew/php/terminus`  
+- Install Terminus: `mkdir ~/terminus && cd ~/terminus && curl -O https://raw.githubusercontent.com/pantheon-systems/terminus-installer/master/builds/installer.phar && php installer.phar install`  
 - Generate a machine token (click this link when you're logged into Pantheon) [https://dashboard.pantheon.io/account#account/tokens](https://dashboard.pantheon.io/account#account/tokens)
 - Paste in the command, it should be something like `terminus auth:login --machine-token=gibberishstuff`  
 - After that initial login, you should be able to perform subsequent logins with: `terminus auth:login --email=email@example.com`

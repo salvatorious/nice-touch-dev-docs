@@ -89,4 +89,14 @@ Now, you can migrate your URLs in the database with WP-CLI:
 - Get remote file backup and copy into current dir:  `terminus backup:get <site>.<env> --element=files | xargs curl -o files.tar.gz`  
 - Unzip files backup:  `gunzip files.tar.gz`  
 - Rename containing folder to "uploads"  
-- Fix permissions: `sudo chown -R _www ~/Sites/<site> ; sudo chmod -R g+w ~/Sites/<site>`
+- Fix permissions: `sudo chown -R _www ~/Sites/<site> ; sudo chmod -R g+w ~/Sites/<site>`  
+
+**OR** you can put this script in your home directory and run it with `~/.fix-permissions.sh`:  
+```
+#!/bin/bash
+
+echo "Enter site slug to fix (script assumes that site is in ~/Sites)";
+read SITENAME;
+
+sudo chown -R _www ~/Sites/$SITENAME ; sudo chmod -R g+w ~/Sites/$SITENAME
+```

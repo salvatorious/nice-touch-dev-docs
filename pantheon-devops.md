@@ -24,7 +24,7 @@ Go to your site's Dashboard->Code tab, click on Git mode under Connection Mode, 
   
 **Database**
 - Copy this script to a file (`import-dev-db.sh` is fine), then run a `chmod +x` command on it.  
-- Then, call it with `./import-dev-sb.sh`    
+- Then, call it with `./import-dev-db.sh`    
 ```
 #!/bin/bash
 

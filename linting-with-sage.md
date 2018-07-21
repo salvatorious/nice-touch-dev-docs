@@ -1,7 +1,7 @@
-Stylelint will fix most of the things it's mad about if you use this command
+Stylelint will fix most of the things it's mad about if you use this command.   
 `yarn run stylelint --fix resources/assets/styles/_nice-touch-old.scss`  
   
-Add rules with null to the config in `package.json` to turn them off
+Add rules with null to the config in `package.json` to turn them off.
 ```
 "stylelint": {
   "extends": "stylelint-config-standard",

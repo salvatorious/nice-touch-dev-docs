@@ -1,15 +1,19 @@
-Assuming you have a fresh local Wordpress install...
+# Install Wordpress
+
+From your sites directory,
+* run `curl -O https://wordpress.org/latest.tar.gz`
+* then `tar -zxvf latest.tar.gz`
 
 # Requirements
 * Git
 * PHP >= 7.0
-* Composer
-* Node.js >=6.9.x
-* Yarn
+* Composer `composer self-update`
+* Node.js >=8.0.0 `nvm install node`
+* Yarn `curl --compressed -o- -L https://yarnpkg.com/install.sh | bash`
 * WP-CLI
 
 ## Installing Sage without Composer
-* Clone or Download the Zip
+* Clone or Download the Zip `git clone git@github.com:roots/sage.git`
 
 From the theme directory, 
 * run `composer install`
@@ -29,8 +33,3 @@ From the theme directory,
 ```
 
 * run `yarn build`
-
-## Adding Test Data (Optional)
-* `curl -OL https://raw.githubusercontent.com/poststatus/wptest/master/wptest.xml`
-* `wp plugin install wordpress-importer --activate`
-* `wp import wptest.xml --authors=create`

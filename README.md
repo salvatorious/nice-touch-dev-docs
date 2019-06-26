@@ -14,7 +14,9 @@ Local development process consists of the following:
 **Apache** is the webserver.  
 - important config files are in `/etc/apache2/`.  
 - after modifying config files, restart Apache with `sudo service apache2 restart`.  
+
 **MySQL** is the database.  
+  
 **PHP** is the programming language that WordPress runs on.  
 - Configuration for PHP is accomplished by modifying the php.ini file. You can find the location of this file by making a phpinfo.php file in your webroot, with the content `<?php phpinfo(); ?>`. You can then go to sites.test/phpinfo.php to see your full php profile.    
 
